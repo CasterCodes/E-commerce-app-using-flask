@@ -1,0 +1,52 @@
+{% extends 'layout.html'%}
+
+{% block content%}
+  <div class="row my-5">
+      <!-- Product Image Column -->
+      <div class="col-md-6">
+        <div class="card">
+          <img src="{{product.image_url}}" class="card-img-top" alt="{{product.name}}">
+        </div>
+      </div>
+      <!-- Product Details Column -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <div class='d-flex flex-row align-items-center '>
+                    <h4  class="text-black d-inline-block  fw-bolder"> {{"Ksh {:,.2f}".format(product.discount_price)}}</h4>
+                    <h6 style="text-decoration: line-through;" class="text-primary text-muted d-inline-block fw-bold fs-5 mx-2"> {{"Ksh {:,.2f}".format(product.price)}}</h6>
+            </div>
+            
+            <a href="#" class="btn btn-primary">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+     <section>
+    <div class="mb-4">
+        <h2 class="fs-5">Related products</h2>
+    </div>
+    <div class="row g-5">
+    {% for product in related_products %}
+        <div class="col-md-3">
+            <a style="display:inline-block; text-decoration:none;" href="{{url_for('products.product', product_id=product.id)}}">
+                 <div class="card py-2" style="width: 16rem;">
+                <img src="{{product.image_url}}" class="card-img-top" alt="{{product.name}}">
+                <div class="card-body">
+                    <h4 style="hover {text-decoration: underline;}; " class="card-title fs-4 text-primary">{{product.name}}</h4>
+                    <p class="card-text d-inline-block">{{product.description}}</p>
+                    <div class='d-flex flex-column '>
+                        <p  class="text-black d-inline-block my-2 fw-bolder"> {{"Ksh {:,.2f}".format(product.discount_price)}}</p>
+                        <p style="text-decoration: line-through;" class="text-primary text-muted d-inline-block fw-bold fs-5"> {{"Ksh {:,.2f}".format(product.price)}}</p>
+                    </div>
+                </div>
+            </div>
+            </a>
+           
+        </div>
+    {% endfor %}
+    </div>
+  </section>
+{% endblock%}

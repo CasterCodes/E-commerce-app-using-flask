@@ -13,7 +13,10 @@ def index():
 
 @products.route('/<product_id>', methods=['GET'])
 def product(product_id):
-    return product_id
+    print(current_user)
+    product = Product.query.get_or_404(product_id, 'There is not product with that id')
+    related_products = Product.query.filter(Product.category_id==product.category_id, Product.id != product.id).limit(6)
+    return render_template('product.html', current_user=current_user, product=product, related_products=related_products)
 
 @products.route("/cart")
 @login_required
