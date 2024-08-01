@@ -1,0 +1,85 @@
+
+{% extends 'layout.html' %}
+{% block title %}
+    Profile  {{current_user.username}} 
+ {% endblock %}
+
+ {%block content %}
+    <div class="container mt-5">
+    <div class="row">
+      <!-- Profile Sidebar -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="User Profile Picture">
+            <h4 class="card-title">{{current_user.username}}</h4>
+            <p class="card-text">{{current_user.email}}</p>
+            <p class="card-text"><strong>Username:</strong>{{current_user.username}}</p>
+          </div>
+        </div>
+        <div class="list-group mt-4">
+          <a href="#order-history" class="list-group-item list-group-item-action">Order History</a>
+          <a href="#wishlist" class="list-group-item list-group-item-action">Wishlist</a>
+          <a href="#account-details" class="list-group-item list-group-item-action">Account Details</a>
+        </div>
+      </div>
+      <!-- Profile Main Content -->
+      <div class="col-md-8">
+        <div id="order-history" class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Order History</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Order ID</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1234</th>
+                  <td>2024-07-01</td>
+                  <td>Delivered</td>
+                  <td>$100.00</td>
+                </tr>
+                <tr>
+                  <th scope="row">5678</th>
+                  <td>2024-06-15</td>
+                  <td>Processing</td>
+                  <td>$50.00</td>
+                </tr>
+                <tr>
+                  <th scope="row">9101</th>
+                  <td>2024-05-30</td>
+                  <td>Cancelled</td>
+                  <td>$75.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="wishlist" class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Wishlist</h5>
+            <ul class="list-group">
+              <li class="list-group-item">Product 1 <button class="btn btn-sm btn-primary float-end">View</button></li>
+              <li class="list-group-item">Product 2 <button class="btn btn-sm btn-primary float-end">View</button></li>
+              <li class="list-group-item">Product 3 <button class="btn btn-sm btn-primary float-end">View</button></li>
+            </ul>
+          </div>
+        </div>
+        <div id="account-details" class="card">
+          <div class="card-body">
+            <h5 class="card-title">Account Details</h5>
+            <p class="card-text"><strong>Username:</strong>{{current_user.username}}</p>
+            <p class="card-text"><strong>Email:</strong> {{current_user.email}}</p>
+            <p class="card-text"><strong>Phone:</strong> (123) 456-7890</p>
+            <p class="card-text"><strong>Address:</strong> 123 Main St, Anytown, USA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ {% endblock%}
