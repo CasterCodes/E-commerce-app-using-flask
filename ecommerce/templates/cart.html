@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}shopping cart{%endblock%}
+
+{% block content %} 
+    <div class="container mt-5 py-5">
+        <h1 class="mb-4">Shopping Cart</h1>
+
+        <!-- Cart Items -->
+        <div class="row">
+            {% for product_id, item in cart.items() %}
+                <div class="list-group-item mt-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ item['image_url'] }}" alt="{{ item['name'] }}" class="img-thumbnail" style="width: 80px; height: 80px;">
+                        <div class="mx-2">
+                            <h5 class="mb-1">{{ item['name'] }}</h5>
+                            <p class="mb-1">{{"Ksh {:,.2f}".format(item['price'])}}</p>
+                        </div>
+                    </div>
+                    <div>
+                         <form action="{{ url_for('cart.update_quantity') }}" method="POST" class="mt-auto">
+                                <div class="input-group mb-3">
+                                    <input type="number"  name="quantity" value="{{ item['quantity'] }}" min="1" class="form-control">
+                                    <input type="hidden" name="product_id" value="{{ product_id}}" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="submit">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                       
+                    </div>
+                   <p class="card-text">Total: {{"Ksh {:,.2f}".format(item['price'] * item['quantity'] )}}</p>
+                            <form action="{{ url_for('cart.remove_from_cart') }}" method='post'>
+                                <button type='submit'class="btn btn-danger mt-2">Remove</button>
+                            </form>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center">Your cart is empty</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="d-flex justify-content-between mt-4">
+            <h4>Total Items: {{ total_items }}</h4>
+            <h4>Total Price: {{"Ksh {:,.2f}".format(total)}}</h4>
+        </div>
+
+        <!-- Checkout Button -->
+        <div class="mt-4">
+            <a href="/" class="btn btn-success btn-md">Proceed to Checkout</a>
+            <a href="{{ url_for('products.index') }}" class="btn btn-secondary btn-md">Continue Shopping</a>
+        </div>
+    </div>
+{% endblock%}

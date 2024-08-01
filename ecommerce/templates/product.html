@@ -1,5 +1,7 @@
 {% extends 'layout.html'%}
 
+{% block title%} {{product.name}}{% endblock%}
+
 {% block content%}
   <div class="row my-5">
       <!-- Product Image Column -->
@@ -18,8 +20,17 @@
                     <h4  class="text-black d-inline-block  fw-bolder"> {{"Ksh {:,.2f}".format(product.discount_price)}}</h4>
                     <h6 style="text-decoration: line-through;" class="text-primary text-muted d-inline-block fw-bold fs-5 mx-2"> {{"Ksh {:,.2f}".format(product.price)}}</h6>
             </div>
+            {% if product_in_cart %}
+               <button type='button' class="btn btn-primary">Product in cart</button>
+            {% else %}
+              <form action="{{url_for('cart.add_to_cart')}}" method='post'>
+                <input type='hidden' name='product_id' value={{product.id}} />
+                <button type='submit' class="btn btn-primary">Add to Cart</button>
+              </form>
+            {% endif %}
             
-            <a href="#" class="btn btn-primary">Add to Cart</a>
+            
+           
           </div>
         </div>
       </div>
@@ -32,7 +43,7 @@
     {% for product in related_products %}
         <div class="col-md-3">
             <a style="display:inline-block; text-decoration:none;" href="{{url_for('products.product', product_id=product.id)}}">
-                 <div class="card py-2" style="width: 16rem;">
+                 <div class="card" style="width: 16rem;">
                 <img src="{{product.image_url}}" class="card-img-top" alt="{{product.name}}">
                 <div class="card-body">
                     <h4 style="hover {text-decoration: underline;}; " class="card-title fs-4 text-primary">{{product.name}}</h4>

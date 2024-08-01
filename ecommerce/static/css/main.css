@@ -1,3 +1,17 @@
 body {
   background-color: antiquewhite;
 }
+
+.navbar-custom {
+      background-color: rgb(28, 25, 25);
+    }
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: antiquewhite;
+}
+
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .nav-link:hover {
+  color: rgb(223, 219, 213);
+}

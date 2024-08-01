@@ -11,6 +11,7 @@ auth  = Blueprint('auth', __name__)
 
 @auth.route("/register", methods=['POST', 'GET'])
 def register():
+    
 
     if request.method == 'POST':
 
