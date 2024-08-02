@@ -16,9 +16,9 @@
         <div class="col-md-3">
             <a style="display:inline-block; text-decoration:none;" href="{{url_for('products.product', product_id=product.id)}}">
                  <div class="card py-2" style="width: 16rem;">
-                <img src="{{product.image_url}}" class="card-img-top" alt="{{product.name}}">
-                <div class="card-body">
-                    <h4 style="hover {text-decoration: underline;}; " class="card-title fs-4 text-primary">{{product.name}}</h4>
+                    <img src="{{product.image_url}}" class="card-img-top" alt="{{product.name}}">
+                    <div class="card-body">
+                    <h5 style="hover {text-decoration: underline;}; " class="card-title fs-4 text-primary">{{product.name}}</h5>
                     <p class="card-text d-inline-block">{{product.description}}</p>
                     <div class='d-flex flex-column '>
                         <p  class="text-black d-inline-block my-2 fw-bolder"> {{"Ksh {:,.2f}".format(product.discount_price)}}</p>

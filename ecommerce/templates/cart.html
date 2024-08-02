@@ -31,6 +31,7 @@
                     </div>
                    <p class="card-text">Total: {{"Ksh {:,.2f}".format(item['price'] * item['quantity'] )}}</p>
                             <form action="{{ url_for('cart.remove_from_cart') }}" method='post'>
+                                <input type="hidden" name="product_id" value="{{ product_id}}" class="form-control">
                                 <button type='submit'class="btn btn-danger mt-2">Remove</button>
                             </form>
                 </div>
@@ -49,7 +50,7 @@
 
         <!-- Checkout Button -->
         <div class="mt-4">
-            <a href="/" class="btn btn-success btn-md">Proceed to Checkout</a>
+            <a href="{{url_for('cart.checkout')}}" class="btn btn-success btn-md">Proceed to Checkout</a>
             <a href="{{ url_for('products.index') }}" class="btn btn-secondary btn-md">Continue Shopping</a>
         </div>
     </div>

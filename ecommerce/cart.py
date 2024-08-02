@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session
+from flask_login import login_required
 from .models import Product
 from .utils import  get_cart_total_items, calculate_cart_totals
 
@@ -52,15 +53,23 @@ def update_quantity():
 @carts.route('/remove_from_cart', methods=['POST'])
 def remove_from_cart():
      product_id = request.form.get('product_id')
+
+     if not product_id:
+            return redirect(url_for('products.index'))
+
      cart = session.get('cart',{})
 
      if product_id in cart:
             del cart[product_id]
+            session['cart'] = cart
+        
      return redirect(url_for('cart.cart'))
 
-@cart.route('/checkout', methods=['GET'])
+@carts.route('/checkout', methods=['GET'])
+@login_required
 def checkout():
-     return render_template('checkout.html')
+     cart = session.get('cart', {})
+     return render_template('checkout.html', cart=cart, total_price=calculate_cart_totals(), total_items=get_cart_total_items())
     
 
 
